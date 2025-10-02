@@ -1,0 +1,44 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+
+.header{
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(223, 148, 44);
+
+}
+.list{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    margin: 20px;
+    
+}
+li{
+    margin: 20px;
+    
+}
+a{
+    text-decoration: none;
+    color: rgb(27, 7, 7);
+    font-size: large;
+}
+.light {
+  background-color: white;
+  color: rgb(41, 38, 38);
+}
+
+.dark {
+  background-color: #121212;
+  color: white;
+}
+
+
+
+
