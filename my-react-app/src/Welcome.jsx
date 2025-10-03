@@ -1,41 +1,36 @@
-import { useEffect, useState,useRef } from "react";
+import { useEffect, useState } from "react";
+
+import axios from "axios";
 
 function Welcome() {
   const [fact, setFact] = useState("");
-  const didFetch = useRef(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
     const url = "https://meowfacts.herokuapp.com/";
-
-    if (didFetch.current) {return;}
-    didFetch.current = true;
-    
 
     const getFact = async () => {
       try {
-        let response = await fetch(url);
-
-        if (!response.ok) {
-          throw new Error(`HTTP Status: ${response.status}`);
-        }
-
-        let data = await response.json();
-
-        
-        
-        setFact(data.data[0]);
+        let response = await axios.get(url, { signal });
+        setFact(response.data.data[0]);
       } catch (err) {
+        setFact("");
         console.error("Data not found", err);
+      } finally {
+        setLoading(false);
       }
     };
 
     getFact();
+    return () => { controller.abort(); };
   }, []);
 
   return (
     <>
       <h1>Welcome</h1>
-      {fact && <p>{fact}</p>}
+      {loading ? <p>Loading...</p> : fact ? <p>{fact}</p> : <p></p>}
     </>
   );
 }

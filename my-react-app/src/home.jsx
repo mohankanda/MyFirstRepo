@@ -4,6 +4,8 @@ import IncidentList from "./IncidentList.jsx";
 import Welcome from "./Welcome.jsx";
 import data from "./incidents.json";
 
+import { Link ,Route ,Routes } from "react-router-dom";
+
 function incidentsReducer(state, action) {
   switch (action.type) {
     case "add":
@@ -26,7 +28,7 @@ function Home() {
   const [homePageView, setHomePageView] = useState(false);
   const [incidentPageView, setIncidentPageView] = useState(false);
 
-  const [darkMode, setDarkMode] = useState(false); // 🌙 track dark mode
+  const [darkMode, setDarkMode] = useState(false); 
   const [incidents, dispatch] = useReducer(incidentsReducer, data);
 
   function handleHomePageView() {
@@ -47,7 +49,7 @@ function Home() {
     dispatch({ type: "add", payload: newIncident });
   }
 
-  // ✅ Define toggleDarkmode
+  
   function toggleDarkmode() {
     setDarkMode((prev) => !prev);
   }
@@ -62,28 +64,24 @@ function Home() {
         </h1>
         <ul className={styles.list}>
           <li>
-            <a href="#" onClick={handleHomePageView}>
+            <Link to='/' onClick={handleHomePageView}>
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" onClick={handleIncidentPageView}>
+            <Link to='/incidents' onClick={handleIncidentPageView}>
               Incident
-            </a>
+            </Link>
           </li>
         </ul>
         <button onClick={toggleDarkmode}>Toggle DarkMode</button>
       </header>
 
-      {(!homePageView && incidentPageView) ? (
-        <IncidentList
-          incidents={incidents}
-          handleDelete={handleDelete}
-          onAdd={handleAdd}
-        />
-      ) : (
-        <Welcome />
-      )}
+      <Routes>
+
+      <Route path="/" element={homePageView ? <Welcome /> : null} />
+  <Route path="/incidents" element={incidentPageView ? <IncidentList incidents={incidents} onAdd={handleAdd} handleDelete={handleDelete} /> : null} />
+      </Routes>
     </div>
   );
 }

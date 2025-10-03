@@ -23,6 +23,7 @@ function App() {
 
   return (
     <>
+    
     <ThemeContext.Provider value="darkmode">
     <Home toggleDarkmode = {handleToggleDarkMode} />
     </ThemeContext.Provider>

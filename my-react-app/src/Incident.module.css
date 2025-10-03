@@ -10,7 +10,7 @@
   width: 200px;
   min-height: 180px;
 
-  background-color: rgb(190, 118, 24);
+  background-color: purple;
   border-radius: 10px;
   box-sizing: border-box;
   color: white;
@@ -31,7 +31,7 @@
   padding: 5px 10px;
   border-radius: 10px;
   background-color: rgb(239, 216, 13);
-  color: rgb(243, 12, 12);
+  color: black;
   border: none;
   cursor: pointer;
 }

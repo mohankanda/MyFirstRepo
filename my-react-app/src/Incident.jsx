@@ -1,5 +1,7 @@
 import styles from "./Incident.module.css";
 
+import { Button } from "@mui/material";
+
 function Incident({ incident, handleClick }) {
   const { incident_id, status, priority, severity } = incident;
 
@@ -10,13 +12,16 @@ function Incident({ incident, handleClick }) {
       <p><b>Priority:</b> {priority}</p>
       <p><b>Severity:</b> {severity}</p>
       
-      <button 
-        type="button" 
+      <Button 
+        
+        color="error"
+        variant="contained"
+
         onClick={handleClick} 
-        className={styles.btn}
+        
       >
         Delete
-      </button>
+      </Button>
     </div>
   );
 }
