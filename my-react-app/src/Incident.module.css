@@ -4,36 +4,40 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-
   margin: 10px;
-  padding: 10px;
-  width: 200px;
-  min-height: 180px;
-
-  background-color: purple;
-  border-radius: 10px;
+  padding: 18px 16px 16px 16px;
+  width: 230px;
+  min-height: 220px;
+  background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+  border-radius: 16px;
   box-sizing: border-box;
-  color: white;
+  color: #fff;
+  box-shadow: 0 4px 16px 0 rgba(0,0,0,0.10);
+  font-size: 1.08rem;
 }
 
 
 .box {
   display: flex;
-  flex-wrap: wrap;  
-  gap: 20px;         
-  justify-content: flex-start; 
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
   align-items: flex-start;
-  margin-top: 20px;
+  margin-top: 24px;
 }
+
 
 .btn {
   margin-top: 15px;
-  padding: 5px 10px;
-  border-radius: 10px;
-  background-color: rgb(239, 216, 13);
-  color: black;
+  padding: 6px 18px;
+  border-radius: 8px;
+  background-color: #ff4b2b;
+  color: #fff;
   border: none;
   cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-right: 8px;
 }
 
 
@@ -42,6 +46,24 @@
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  background-color: rgb(109, 224, 27);
+  background-color: darkcyan;
   padding: 20px;
+  border-radius: 12px;
+}
+
+
+
+.buttonRow {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  margin-top: 18px;
+  width: 100%;
+  justify-content: center;
+}
+
+.div :global(.MuiTextField-root),
+.div :global(.MuiSelect-root) {
+  margin-bottom: 12px;
+  width: 100%;
 }

@@ -12,6 +12,8 @@ function incidentsReducer(state, action) {
       return [...state, action.payload];
     case "delete":
       return state.filter((i) => i.incident_id !== action.payload);
+    case "update":
+      return action.payload;
     default:
       return state;
   }
@@ -49,6 +51,10 @@ function Home() {
     dispatch({ type: "add", payload: newIncident });
   }
 
+  function handleUpdate(updatedList) {
+    dispatch({ type: "update", payload: updatedList });
+  }
+
   
   function toggleDarkmode() {
     setDarkMode((prev) => !prev);
@@ -80,7 +86,7 @@ function Home() {
       <Routes>
 
       <Route path="/" element={homePageView ? <Welcome /> : null} />
-  <Route path="/incidents" element={incidentPageView ? <IncidentList incidents={incidents} onAdd={handleAdd} handleDelete={handleDelete} /> : null} />
+  <Route path="/incidents" element={incidentPageView ? <IncidentList incidents={incidents} onAdd={handleAdd} handleDelete={handleDelete} onUpdate={handleUpdate} /> : null} />
       </Routes>
     </div>
   );

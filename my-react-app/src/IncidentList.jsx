@@ -1,10 +1,9 @@
 import Incident from "./Incident.jsx";
 import { useContext, useState } from "react";
 import styles from "./Incident.module.css";
-
 import { ThemeContext } from "./ThemeContext.js";
 
-function IncidentList({ incidents, handleDelete, onAdd }) {
+function IncidentList({ incidents, handleDelete, onAdd, onUpdate }) {
   const [form, setForm] = useState({
     incident_id: "",
     priority: "low",
@@ -12,15 +11,21 @@ function IncidentList({ incidents, handleDelete, onAdd }) {
     status: "low",
   });
 
+  const theme = useContext(ThemeContext);
+  const IncidentListClass = `${styles.IncidentList} ${
+    theme === "dark" ? styles.dark : ""
+  }`;
+
+  
   function handleChange(e) {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   }
 
+ 
   function handleSubmit(e) {
     e.preventDefault();
 
-    // Validate incident ID
     if (!form.incident_id.trim()) {
       alert("Please enter an Incident ID");
       return;
@@ -33,9 +38,8 @@ function IncidentList({ incidents, handleDelete, onAdd }) {
       status: form.status,
     };
 
-    onAdd(newIncident);
+    onAdd(newIncident); 
 
-    // Reset the form
     setForm({
       incident_id: "",
       priority: "low",
@@ -44,8 +48,20 @@ function IncidentList({ incidents, handleDelete, onAdd }) {
     });
   }
 
-  const theme = useContext(ThemeContext);
-  const IncidentListClass = `${styles.IncidentList} ${theme === "dark" ? styles.dark :''}`
+
+  function handleUpdate(id, updatedIncident) {
+    
+    const updatedList = incidents.map((incident) =>
+      incident.incident_id === id
+        ? { ...incident, ...updatedIncident }
+        : incident
+    );
+
+    
+    if (onUpdate) {
+      onUpdate(updatedList);
+    }
+  }
 
   return (
     <>
@@ -108,18 +124,25 @@ function IncidentList({ incidents, handleDelete, onAdd }) {
             </select>
           </span>
 
-          <button type="submit">Save</button>
+          <button type="submit" className={styles.btn}>
+            Save
+          </button>
         </form>
       </main>
 
       <div className={styles.box}>
-        {incidents.map((incident) => (
-          <Incident
-            key={incident.incident_id}
-            incident={incident}
-            handleClick={() => handleDelete(incident.incident_id)}
-          />
-        ))}
+        {incidents.length > 0 ? (
+          incidents.map((incident) => (
+            <Incident
+              key={incident.incident_id}
+              incident={incident}
+              handleClick={() => handleDelete(incident.incident_id)}
+              handleUpdate={handleUpdate}
+            />
+          ))
+        ) : (
+          <p>No incidents available</p>
+        )}
       </div>
     </>
   );
